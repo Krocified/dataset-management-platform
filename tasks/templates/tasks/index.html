@@ -1,0 +1,40 @@
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        
+        <h1>Tasks List</h1>
+
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        
+        {% if taskList %}
+            <ul>
+                {% for task in taskList %}
+                    <li>
+                        <a href="{% url 'tasks:detail' task.id %}">
+                            {{ task.title }}{% if task.booked_by %} - {{ task.booked_by }}{% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No tasks are available.</p>
+        {% endif %}
+
+        <form>
+            <button formaction="{% url 'tasks:new_task' %}">New Task</button>
+        </form>
+
+        <p><a href="{% url 'logout' %}">Log Out</a></p>
+
+        <script src="" async defer></script>
+    </body>
+</html>
+
