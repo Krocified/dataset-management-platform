@@ -5,31 +5,45 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'tasks/style.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;700&display=swap" rel="stylesheet">
     </head>
     <body>
         
-        <h1>New Task</h1>
+        <div id="title" class="center">
+            <h1>New Task</h1>
+        </div>
         
-        <form action="{% url 'tasks:new_task_success' %}" method="post" enctype="multipart/form-data">
+        <form class="center" action="{% url 'tasks:new_task_success' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
                 {{ message }}
                 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
                 Title: <input type="text" name="title" id="new-task-title" value="New Title">
                 <br/>
+                <br/>
+                <br/>
                     
-                <p>{{ form.non_field_errors }}</p>
+                <p class="center">{{ form.non_field_errors }}</p>
 
-                <p>{{ form.zip_file.label_tag }} {{ form.zip_file.help_text }}</p>
+                <p class="center">{{ form.zip_file.label_tag }} {{ form.zip_file.help_text }}</p>
 
-                <p>
-                    {{ form.zip_file.errors }}
-                    {{ form.zip_file }}
-                </p>
+                <div>
+                    <p class="center">
+                        {{ form.zip_file.errors }}
+                        {{ form.zip_file }}
+                    </p>
+                </div>
                 
                 <br/>
-            <input type="submit" value="Add">
+            <input class="link-btn" type="submit" value="Add">
+        </form>
+
+        <form class="center link-btn-wrapper">
+            <button class="link-btn" formaction="{% url 'tasks:index' %}">Back</button>
         </form>
 
         <script src="" async defer></script>

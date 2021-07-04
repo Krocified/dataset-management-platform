@@ -3,12 +3,24 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <p><a href="{% url 'tasks:index' %}">Tasks</a></p>
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
-{% endif %}
+
+  <div id="title" class="center">
+    <h1>
+      Dataset Management Platform
+    </h1>
+  </div>
+  {% if user.is_authenticated %}
+    <div class="center">
+      <h3>
+        Hi {{ user.username }}!
+      </h3>
+    </div>
+    <p id="link-text" class="center"><a href="{% url 'tasks:index' %}">Tasks</a></p>
+    <p id="link-text-logout" class="center"><a href="{% url 'logout' %}">Log Out</a></p>
+  {% else %}
+    <p class="center">You are not logged in</p>
+    <p id="link-text" class="center">
+      <a href="{% url 'login' %}">Log In</a>
+    </p>
+  {% endif %}
 {% endblock %}

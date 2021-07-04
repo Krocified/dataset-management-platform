@@ -3,23 +3,30 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Task List</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'tasks/style.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;700&display=swap" rel="stylesheet">
     </head>
     <body>
-        
-        <h1>Tasks List</h1>
+        <div id="title" class="center">
+            <h1>Tasks List</h1>
+        </div>
 
-        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        {% if error_message %}<p class="center"><strong>{{ error_message }}</strong></p>{% endif %}
         
         {% if taskList %}
-            <ul>
+            <ul class="center">
                 {% for task in taskList %}
                     <li>
                         <a href="{% url 'tasks:detail' task.id %}">
-                            {{ task.title }}{% if task.booked_by %} - {{ task.booked_by }}{% endif %}
+                            <div id="task-item"> 
+                                {{ task.title }}{% if task.booked_by %} - {{ task.booked_by }}{% endif %}
+                            </div>
                         </a>
                     </li>
                 {% endfor %}
@@ -28,11 +35,11 @@
             <p>No tasks are available.</p>
         {% endif %}
 
-        <form>
-            <button formaction="{% url 'tasks:new_task' %}">New Task</button>
+        <form class="center link-btn-wrapper">
+            <button class="link-btn" formaction="{% url 'tasks:new_task' %}">New Task</button>
         </form>
 
-        <p><a href="{% url 'logout' %}">Log Out</a></p>
+        <p id="link-text-logout" class="center"><a href="{% url 'home' %}">Home</a></p>
 
         <script src="" async defer></script>
     </body>

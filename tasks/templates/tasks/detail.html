@@ -5,39 +5,44 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'tasks/style.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;700&display=swap" rel="stylesheet">
     </head>
     <body>
         
-        <h1>{{ task.title }}</h1>
+        <div id="title" class="center">
+            <h1>{{ task.title }}</h1>
+        </div>
         
-
-        <h3>Uploaded on {{ task.upload_date }}</h3>
+        <h3 class="center">Uploaded on {{ task.upload_date }}</h3>
 
         {%if task.booked_by %}
-            <h3>Booked by {{ task.booked_by }}</h3>
+            <h3 class="center">Booked by {{ task.booked_by }}</h3>
 
-            <form>
-                <button formaction="{% url 'tasks:revoke' task.id %}" >Revoke</button>
+            <form class="center link-btn-wrapper">
+                <button class="link-btn" formaction="{% url 'tasks:revoke' task.id %}" >Revoke</button>
             </form>
 
-            <form>
-                <button formaction="{% url 'tasks:download' task.id %}" >Download</button>
+            <form class="center link-btn-wrapper">
+                <button class="link-btn" formaction="{% url 'tasks:download' task.id %}" >Download</button>
             </form>
 
-            <form>
-                <button formaction="{% url 'tasks:delete' task.id %}">Delete</button>
+            <form class="center link-btn-wrapper">
+                <button class="link-btn" formaction="{% url 'tasks:delete' task.id %}">Delete</button>
             </form>
 
         {%else%}
-            <form>
-                <button formaction="{% url 'tasks:book' task.id %}" >Book</button>
+            <form class="center link-btn-wrapper">
+                <button class="link-btn" formaction="{% url 'tasks:book' task.id %}" >Book</button>
             </form>
 
         {%endif%}
 
-        <form>
-            <button formaction="{% url 'tasks:index' %}" >Back</button>
+        <form class="center link-btn-wrapper">
+            <button class="link-btn" formaction="{% url 'tasks:index' %}" >Back</button>
         </form>
 
         <script src="" async defer></script>
